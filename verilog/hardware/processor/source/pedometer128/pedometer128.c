@@ -12,20 +12,20 @@ accelAxis
   	/*
 	 *	Hold data and info about single acceleration axis:
 	 */  
-	float 	data[numberOfSamples];  /*
+	int 	data[numberOfSamples];  /*
 				     *	array to store filtered data
 				     */
-	float	max;    /*
+	int	max;    /*
 			 *	maximum data entry
 			 */
 			  
-  	float 	min;    /*
+  	int 	min;    /*
 			 *	minimum data entry
 			 */  
-  	float 	peakToPeak;    /*
+  	int 	peakToPeak;    /*
 			 *	peak to peak value
 			 */	
-  	float 	thresh; /*
+  	int 	thresh; /*
 			 *	current value of dynamic threshold 
 			 */	
 };
@@ -36,10 +36,10 @@ findAxisProperties(struct accelAxis *axis)
   	/*
 	 * Find peak-to-peak value and threshold for single-axis data
 	 */
-        float 	max = axis->data[0];
-        float	min = axis->data[0];
-        float	peakToPeak;
-        float	thresh;
+        int 	max = axis->data[0];
+        int	min = axis->data[0];
+        int	peakToPeak;
+        int	thresh;
 
         for (int i=0; i<numberOfSamples; i++)
 	{
@@ -54,7 +54,7 @@ findAxisProperties(struct accelAxis *axis)
         }
 
         peakToPeak = max-min;
-        thresh = (max+min)/2.0;
+        thresh = (max+min)/2;
 
         /*
 	 *	Write values into struct
@@ -72,8 +72,8 @@ chooseAxis(struct accelAxis *x, struct accelAxis *y, struct accelAxis *z, float 
 	 *	Perform maximum activity axis selection
 	 */	
 
-        float	peakToPeak[3];
-        float	maxPeakToPeak = 0;
+        int	peakToPeak[3];
+        int	maxPeakToPeak = 0;
         int	maxIndex;
 
         findAxisProperties(x);
@@ -121,8 +121,8 @@ detectSteps(struct accelAxis *chosen)
 	 *	Finds where threshold is crossed in negative slope direction
 	 */	
 
-    	float	steps = 0;
-    	float	current, next;
+    	int	steps = 0;
+    	int	current, next;
     	for(int i=0; i<numberOfSamples-1;i++)
 	{
         	current = chosen->data[i];
@@ -136,7 +136,7 @@ detectSteps(struct accelAxis *chosen)
 }
 
 void 
-readRawData(float *tBuffer, float *xBuffer, float *yBuffer, float *zBuffer)
+readRawData(int *tBuffer, int *xBuffer, int *yBuffer, int *zBuffer)
 {
 	for(int j = 0; j < numberOfSamples; j++)
     	{
@@ -168,14 +168,14 @@ readRawData(float *tBuffer, float *xBuffer, float *yBuffer, float *zBuffer)
 }
 
 void 
-MovingAvgFilter(float input[], struct accelAxis *output)
+MovingAvgFilter(int input[], struct accelAxis *output)
 {
 	/*
 	 *	Implement moving average low pass filtering
 	 *	by using unweighted average of frames of 4 samples
 	 */	
 
-        float	sum = 0, mean;
+        int	sum = 0, mean;
 
         /*	
 	 *	calculate mean of input array
@@ -209,30 +209,29 @@ int
 main(void)
 {
 	volatile unsigned int *		gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
-	/* Begin Benchmark - Pulse On Off */
-	for (int i = 0; i < 5; i++){
-		*gDebugLedsMemoryMappedRegister = 0xFF;
-		for (int j = 0; j < 40000; j++);
-		*gDebugLedsMemoryMappedRegister = 0x00;
-		for (int j = 0; j < 40000; j++);
-	}
+	/* Begin Benchmark - Pulse Off On Off */
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
 
 	int	chosenAxis;
-	float	steps;
-	float	totalSteps = 0;
+	int	steps;
+	int	totalSteps = 0;
 		
 	/*
 	 *	used in calibration stage
 	 */	
-	float	calibrationMax;	
+	int	calibrationMax;	
 	
 	/* 
 	 *	Declare buffers to hold raw unfiltered acceleration data
 	 */	
-    	float	tBuffer[numberOfSamples];
-    	float	xBuffer[numberOfSamples];
-    	float	yBuffer[numberOfSamples];
-    	float	zBuffer[numberOfSamples];
+    	int	tBuffer[numberOfSamples];
+    	int	xBuffer[numberOfSamples];
+    	int	yBuffer[numberOfSamples];
+    	int	zBuffer[numberOfSamples];
 
 	/*
 	 *	Declare struct for each acceleration axis (for use after filtering)
@@ -256,7 +255,7 @@ main(void)
 	 */	
     	readRawData(tBuffer, xBuffer, yBuffer, zBuffer);
 
-	MovingAvgFilter(xBuffer, &xAcceleration);
+		MovingAvgFilter(xBuffer, &xAcceleration);
     	MovingAvgFilter(yBuffer, &yAcceleration);
     	MovingAvgFilter(zBuffer, &zAcceleration);
 
@@ -293,22 +292,13 @@ main(void)
         	totalSteps = 0;
         }  
 
-	/* End Benchmark - Pulse On */
+	/* End Benchmark - Pulse On Off On */
 	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
 	while(1)
 	{
-		*gDebugLedsMemoryMappedRegister = 0xFF;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);
-
-		*gDebugLedsMemoryMappedRegister = 0x00;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);		
+		*gDebugLedsMemoryMappedRegister = 0xFF;	
 	}
 }

@@ -1,44 +1,60 @@
-#TREEROOT	= ../../../..
-TREEROOT = /data/f-of-e-tools/tools/sunflower
-include $(TREEROOT)/conf/setup.conf
+TREEROOT	= ../../../../../
+include $(TREEROOT)/tools/sunflower/conf/setup.conf
 
-TARGET		= riscv
 TARGET-ARCH	= riscv32-elf
+TARGET		= riscv
 
 PROGRAM		= bubblesort
+PROGRAM-SF	= bubblesort-sf
+INIT		= init
+INIT-SF		= init-sf
 
-PORT		= ../port
-LIBOS		= mOS
-TOOLSLIB	= $(TREEROOT)/tools/tools-lib
-INCLUDES	= -I$(PREFIX)/include -I../port/  -I$(TREEROOT)/sys/include -I$(TREEROOT)/sys/kern/superH -I$(TREEROOT)/benchmarks/include -I$(TREEROOT)/sys/libOS/port
 OPTFLAGS	= -O0
-CFLAGS		= $(TARGET-ARCH-FLAGS) -march=rv32i -mabi=ilp32 -Wall # Do not do since we are linking mOS for libc implementation:	-nostdlib -fno-builtin 
+CFLAGS		= -march=rv32i -mabi=ilp32 $(TARGET-ARCH-FLAGS) -Wall 
 ASFLAGS		= --march=rv32i --mabi=ilp32
-LDFLAGS		= -Ttext $(LOADADDR) -L$(TOOLSLIB)/$(TARGET) -L$(TREEROOT)/sys/libOS/$(LIBOS) -Map $(PROGRAM).map
-LOADADDR	= 0x08004000
+LDFLAGS		= -L$(TOOLSLIB)/$(TARGET) -Map $(PROGRAM).map -Tsail.ld
+LDFLAGS-SF	= -Ttext $(LOADADDR-SF)  -L$(TOOLSLIB)/$(TARGET) -Map $(PROGRAM).map
+SREC2HEX	= srec2hex
+LOADADDR-SF	= 0x08004000
 
+OBJS		=\
+		$(INIT).o\
+		$(PROGRAM).o\
 
-OBJS	=\
-	init-$(TARGET).o\
-	$(PROGRAM).o\
+OBJS-SF		=\
+		$(INIT-SF).o\
+		$(PROGRAM).o\
 
+all:	$(PROGRAM) $(PROGRAM).sr $(PROGRAM-SF) $(PROGRAM-SF).sr Makefile
 
-all:	$(PROGRAM) $(PROGRAM).sr
+$(INIT).o: $(INIT).S
+	$(AS) $(ASFLAGS) $(INIT).S -o $(INIT).o
 
 $(PROGRAM): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $@ -lprintf -lc -lgcc -lgloss
+	$(LD) $(LDFLAGS) $(OBJS) -o $@ -lc -lm -lgcc
 
 $(PROGRAM).sr:$(PROGRAM)
 	$(OBJCOPY) -O srec $(PROGRAM) $@
 
 $(PROGRAM).o: $(PROGRAM).c Makefile
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(INCLUDES) -c $(PROGRAM).c
+	$(CC) $(CFLAGS) $(OPTFLAGS) -c $(PROGRAM).c
 
-init-$(TARGET).o: init-$(TARGET).S
-	$(CPP) init-$(TARGET).S > init-$(TARGET).i; $(AS) $(ASFLAGS) init-$(TARGET).i -o $@
 
-clean:
-	$(RM) init-$(TARGET).i *.o $(PROGRAM) $(PROGRAM).sr $(PROGRAM).map sunflower.out
+$(INIT-SF).o: $(INIT-SF).S
+	$(CPP) $(INIT-SF).S > $(INIT-SF).i; $(AS) $(ASFLAGS) $(INIT-SF).i -o $(INIT-SF).o
+
+$(PROGRAM-SF): $(OBJS-SF)
+	$(LD) $(LDFLAGS-SF) $(OBJS-SF) -o $@ -lc -lgcc -lgloss
+
+$(PROGRAM-SF).sr:$(PROGRAM-SF)
+	$(OBJCOPY) -O srec $(PROGRAM-SF) $@
 
 install: all
-	cp $(PROGRAM).sr ../../../
+	$(SREC2HEX) -b 4096 $(PROGRAM).sr
+	cp program.hex ../../programs
+	cp data.hex ../../programs
+
+clean:
+	$(RM) init.i *.o $(PROGRAM) $(PROGRAM).sr $(PROGRAM).map
+	$(RM) init-sf.i *.o $(PROGRAM-SF) $(PROGRAM-SF).sr $(PROGRAM-SF).map
+	$(RM) program.hex data.hex

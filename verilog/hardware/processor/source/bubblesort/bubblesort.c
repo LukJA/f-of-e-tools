@@ -1,15 +1,20 @@
 #include <stdio.h>
-#include <printf.h>
 #include "bsort-input.h"
 
 
-int
-main(void)
+int main(void)
 {
+	volatile unsigned int *		gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
+	/* Begin Benchmark - Pulse Off On Off */
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	
 	int i;
 	int maxindex = bsort_input_len - 1;
 
-	printf("\n\n[%s]\n", bsort_input);
 	while (maxindex > 0)
 	{
 		for (i = 0; i < maxindex; i++)
@@ -25,7 +30,14 @@ main(void)
 
 		maxindex--;
 	}
-	printf("[%s]\n", bsort_input);
 
-	return 0;
+	/* End Benchmark - Pulse On Off On */
+	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
+	while(1)
+	{
+		*gDebugLedsMemoryMappedRegister = 0xFF;	
+	}
 }
