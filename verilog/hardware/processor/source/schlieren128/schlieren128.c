@@ -2,7 +2,7 @@
 #include "dat.h"
 
 
-float Schlieren(float a, float b) {
+int Schlieren(int a, int b) {
 	return (a+b)/(a-b);
 }
 
@@ -18,7 +18,8 @@ int main(void)
 
 	for(int i = 0; i < samplesPerDistribution; i++)
 	{
-		float x = Schlieren(temp[i], humidity[i]);
+		int x = Schlieren(temp[i], humidity[i]);
+		*gDebugLedsMemoryMappedRegister = x & 0xFF;
 	}
 
 	/* End Benchmark - Pulse On */
@@ -26,17 +27,8 @@ int main(void)
 	while(1)
 	{
 		*gDebugLedsMemoryMappedRegister = 0xFF;
-
-		/*
-		 *	Spin
-		 */
 		for (int j = 0; j < 40000; j++);
-
 		*gDebugLedsMemoryMappedRegister = 0x00;
-
-		/*
-		 *	Spin
-		 */
 		for (int j = 0; j < 40000; j++);		
 	}
 }
