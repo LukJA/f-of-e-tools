@@ -209,13 +209,12 @@ int
 main(void)
 {
 	volatile unsigned int *		gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
-	/* Begin Benchmark - Pulse On Off */
-	for (int i = 0; i < 5; i++){
-		*gDebugLedsMemoryMappedRegister = 0xFF;
-		for (int j = 0; j < 40000; j++);
-		*gDebugLedsMemoryMappedRegister = 0x00;
-		for (int j = 0; j < 40000; j++);
-	}
+	/* Begin Benchmark - Pulse Off On Off */
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
 
 	int	chosenAxis;
 	int	steps;
@@ -293,22 +292,13 @@ main(void)
         	totalSteps = 0;
         }  
 
-	/* End Benchmark - Pulse On */
+	/* End Benchmark - Pulse On Off On */
 	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
 	while(1)
 	{
-		*gDebugLedsMemoryMappedRegister = 0xFF;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);
-
-		*gDebugLedsMemoryMappedRegister = 0x00;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);		
+		*gDebugLedsMemoryMappedRegister = 0xFF;	
 	}
 }

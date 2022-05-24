@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "dat.h"
 
-int LowPassFilter(int *in, int *out, int N, double in0)
+int LowPassFilter(int *in, int *out, int N, int in0)
 {
 	out[0] = in[0] + in0;
 	for (int n=1; n < N ; n++) 
@@ -15,9 +15,11 @@ int
 main(void)
 {
 	volatile unsigned int *		gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
-	/* Begin Benchmark - Pulse On Off */
+	/* Begin Benchmark - Pulse Off On Off */
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
 	*gDebugLedsMemoryMappedRegister = 0xFF;
-	for (int j = 0; j < 400000; j++);
+	for (int j = 0; j < 1000; j++);
 	*gDebugLedsMemoryMappedRegister = 0x00;
 
 	const int	numberOfSamples = NOS;
@@ -34,22 +36,13 @@ main(void)
 	in0 = LowPassFilter(xBuffer, xBufferOut, halfNumberOfSamples, in0);
 	in0 = LowPassFilter(&xBuffer[halfNumberOfSamples], &xBufferOut[halfNumberOfSamples], halfNumberOfSamples, in0);
 
-	/* End Benchmark - Pulse On */
+	/* End Benchmark - Pulse On Off On */
 	*gDebugLedsMemoryMappedRegister = 0xFF;
+	for (int j = 0; j < 1000; j++);
+	*gDebugLedsMemoryMappedRegister = 0x00;
+	for (int j = 0; j < 1000; j++);
 	while(1)
 	{
-		*gDebugLedsMemoryMappedRegister = 0xFF;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);
-
-		*gDebugLedsMemoryMappedRegister = 0x00;
-
-		/*
-		 *	Spin
-		 */
-		for (int j = 0; j < 40000; j++);		
+		*gDebugLedsMemoryMappedRegister = 0xFF;	
 	}
 }

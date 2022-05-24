@@ -1,6 +1,6 @@
 #define NOS 64
 
-float temp[NOS] = {
+int temp[NOS] = {
 4904059
 ,4904059
 ,4881430
@@ -68,8 +68,8 @@ float temp[NOS] = {
 ,4899030
 };
 
-float humidity[NOS] = {
-15.33014
+int humidity[NOS] = {
+1533014
 ,1542089
 ,1540857
 ,1540351
