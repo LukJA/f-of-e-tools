@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "dat.h"
 
-float LowPassFilter(float *in, float *out, int N, double in0)
+int LowPassFilter(int *in, int *out, int N, double in0)
 {
 	out[0] = in[0] + in0;
 	for (int n=1; n < N ; n++) 
@@ -22,9 +22,9 @@ main(void)
 
 	const int	numberOfSamples = NOS;
 	int		halfNumberOfSamples = numberOfSamples/2;
-	float 		xBuffer[numberOfSamples];
-	float 		xBufferOut[numberOfSamples];
-	float 		in0 = 0;
+	int 		xBuffer[numberOfSamples];
+	int 		xBufferOut[numberOfSamples];
+	int 		in0 = 0;
 
 	for(int j = 0; j < numberOfSamples; j++)
     	{

@@ -9,7 +9,8 @@ SECTIONS
 	.text . :
 	{
 		_text = . ;
-		*(.text) 
+		*(.text)
+		. = 0x1000;
 		*(.strings)
 		_etext = . ;
 	}
