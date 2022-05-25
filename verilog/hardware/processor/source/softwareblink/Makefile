@@ -50,7 +50,7 @@ $(PROGRAM-SF).sr:$(PROGRAM-SF)
 	$(OBJCOPY) -O srec $(PROGRAM-SF) $@
 
 install: all
-	$(SREC2HEX) -b 4096 $(PROGRAM).sr
+	$(SREC2HEX) -b 4096 $(PROGRAM).sr 2>/dev/null
 	cp program.hex ../../programs
 	cp data.hex ../../programs
 
