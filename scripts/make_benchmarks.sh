@@ -4,9 +4,11 @@ cd ../verilog/hardware/processor
 
 benchmark(){
     cd source/$1
+    make clean
     make install
     cd -
-    make Makefile_no_iceprog
+    make -f Makefile_no_iceprog clean
+    make -f Makefile_no_iceprog
     mkdir ../../../processor_makes/$1
     cp processor_yosys_log.txt processor_nextpnr_log.txt processor_ice_log.txt sail.bin ../../../processor_makes/$1/
 }
