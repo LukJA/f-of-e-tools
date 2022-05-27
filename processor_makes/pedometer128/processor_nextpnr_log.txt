@@ -57,39 +57,39 @@ Info:     at initial placer iter 1, wirelen = 865
 Info:     at initial placer iter 2, wirelen = 849
 Info:     at initial placer iter 3, wirelen = 849
 Info: Running main analytical placer.
-Info:     at iteration #1, type ALL: wirelen solved = 849, spread = 45737, legal = 46299; time = 0.10s
-Info:     at iteration #2, type ALL: wirelen solved = 1319, spread = 30475, legal = 31802; time = 0.13s
-Info:     at iteration #3, type ALL: wirelen solved = 2307, spread = 29865, legal = 30803; time = 0.12s
-Info:     at iteration #4, type ALL: wirelen solved = 2958, spread = 28636, legal = 29404; time = 0.12s
-Info:     at iteration #5, type ALL: wirelen solved = 4199, spread = 28090, legal = 28704; time = 0.12s
+Info:     at iteration #1, type ALL: wirelen solved = 849, spread = 45737, legal = 46299; time = 0.12s
+Info:     at iteration #2, type ALL: wirelen solved = 1319, spread = 30475, legal = 31802; time = 0.14s
+Info:     at iteration #3, type ALL: wirelen solved = 2307, spread = 29865, legal = 30803; time = 0.13s
+Info:     at iteration #4, type ALL: wirelen solved = 2958, spread = 28636, legal = 29404; time = 0.13s
+Info:     at iteration #5, type ALL: wirelen solved = 4199, spread = 28090, legal = 28704; time = 0.13s
 Info:     at iteration #6, type ALL: wirelen solved = 5198, spread = 27388, legal = 28344; time = 0.12s
-Info:     at iteration #7, type ALL: wirelen solved = 6662, spread = 26479, legal = 27388; time = 0.12s
-Info:     at iteration #8, type ALL: wirelen solved = 8594, spread = 25791, legal = 26400; time = 0.11s
-Info:     at iteration #9, type ALL: wirelen solved = 9983, spread = 25057, legal = 25964; time = 0.11s
-Info:     at iteration #10, type ALL: wirelen solved = 11133, spread = 24619, legal = 25693; time = 0.11s
-Info:     at iteration #11, type ALL: wirelen solved = 12208, spread = 23721, legal = 25222; time = 0.11s
+Info:     at iteration #7, type ALL: wirelen solved = 6662, spread = 26479, legal = 27388; time = 0.13s
+Info:     at iteration #8, type ALL: wirelen solved = 8594, spread = 25791, legal = 26400; time = 0.12s
+Info:     at iteration #9, type ALL: wirelen solved = 9983, spread = 25057, legal = 25964; time = 0.12s
+Info:     at iteration #10, type ALL: wirelen solved = 11133, spread = 24619, legal = 25693; time = 0.12s
+Info:     at iteration #11, type ALL: wirelen solved = 12208, spread = 23721, legal = 25222; time = 0.12s
 Info:     at iteration #12, type ALL: wirelen solved = 12749, spread = 24025, legal = 25035; time = 0.11s
-Info:     at iteration #13, type ALL: wirelen solved = 13546, spread = 23641, legal = 24367; time = 0.11s
-Info:     at iteration #14, type ALL: wirelen solved = 14017, spread = 23110, legal = 24101; time = 0.11s
-Info:     at iteration #15, type ALL: wirelen solved = 14679, spread = 23464, legal = 24118; time = 0.11s
+Info:     at iteration #13, type ALL: wirelen solved = 13546, spread = 23641, legal = 24367; time = 0.12s
+Info:     at iteration #14, type ALL: wirelen solved = 14017, spread = 23110, legal = 24101; time = 0.12s
+Info:     at iteration #15, type ALL: wirelen solved = 14679, spread = 23464, legal = 24118; time = 0.12s
 Info:     at iteration #16, type ALL: wirelen solved = 14903, spread = 22983, legal = 23765; time = 0.11s
 Info:     at iteration #17, type ALL: wirelen solved = 15226, spread = 22440, legal = 23659; time = 0.11s
-Info:     at iteration #18, type ALL: wirelen solved = 15544, spread = 22757, legal = 23595; time = 0.11s
-Info:     at iteration #19, type ALL: wirelen solved = 15612, spread = 22294, legal = 23589; time = 0.10s
-Info:     at iteration #20, type ALL: wirelen solved = 15928, spread = 22676, legal = 23477; time = 0.10s
-Info:     at iteration #21, type ALL: wirelen solved = 16045, spread = 22138, legal = 22979; time = 0.10s
+Info:     at iteration #18, type ALL: wirelen solved = 15544, spread = 22757, legal = 23595; time = 0.12s
+Info:     at iteration #19, type ALL: wirelen solved = 15612, spread = 22294, legal = 23589; time = 0.11s
+Info:     at iteration #20, type ALL: wirelen solved = 15928, spread = 22676, legal = 23477; time = 0.12s
+Info:     at iteration #21, type ALL: wirelen solved = 16045, spread = 22138, legal = 22979; time = 0.12s
 Info:     at iteration #22, type ALL: wirelen solved = 16151, spread = 22126, legal = 23326; time = 0.11s
-Info:     at iteration #23, type ALL: wirelen solved = 16402, spread = 22071, legal = 23293; time = 0.10s
-Info:     at iteration #24, type ALL: wirelen solved = 16538, spread = 21999, legal = 22975; time = 0.10s
+Info:     at iteration #23, type ALL: wirelen solved = 16402, spread = 22071, legal = 23293; time = 0.11s
+Info:     at iteration #24, type ALL: wirelen solved = 16538, spread = 21999, legal = 22975; time = 0.11s
 Info:     at iteration #25, type ALL: wirelen solved = 16720, spread = 22075, legal = 23883; time = 0.11s
-Info:     at iteration #26, type ALL: wirelen solved = 16852, spread = 22405, legal = 23218; time = 0.10s
-Info:     at iteration #27, type ALL: wirelen solved = 16905, spread = 22062, legal = 23268; time = 0.10s
-Info:     at iteration #28, type ALL: wirelen solved = 16997, spread = 22043, legal = 23087; time = 0.10s
-Info:     at iteration #29, type ALL: wirelen solved = 17163, spread = 22384, legal = 23342; time = 0.10s
-Info: HeAP Placer Time: 4.52s
-Info:   of which solving equations: 2.41s
-Info:   of which spreading cells: 0.59s
-Info:   of which strict legalisation: 0.20s
+Info:     at iteration #26, type ALL: wirelen solved = 16852, spread = 22405, legal = 23218; time = 0.11s
+Info:     at iteration #27, type ALL: wirelen solved = 16905, spread = 22062, legal = 23268; time = 0.11s
+Info:     at iteration #28, type ALL: wirelen solved = 16997, spread = 22043, legal = 23087; time = 0.11s
+Info:     at iteration #29, type ALL: wirelen solved = 17163, spread = 22384, legal = 23342; time = 0.11s
+Info: HeAP Placer Time: 5.00s
+Info:   of which solving equations: 2.66s
+Info:   of which spreading cells: 0.61s
+Info:   of which strict legalisation: 0.21s
 
 Info: Running simulated annealing placer for refinement.
 Info:   at iteration #1: temp = 0.000000, timing cost = 1716, wirelen = 22975
@@ -101,7 +101,7 @@ Info:   at iteration #25: temp = 0.000000, timing cost = 1381, wirelen = 18912
 Info:   at iteration #30: temp = 0.000000, timing cost = 1381, wirelen = 18883
 Info:   at iteration #35: temp = 0.000000, timing cost = 1382, wirelen = 18872
 Info:   at iteration #35: temp = 0.000000, timing cost = 1382, wirelen = 18872 
-Info: SA placement time 9.12s
+Info: SA placement time 10.40s
 
 Info: Max frequency for clock               'clk': 14.57 MHz (PASS at 6.00 MHz)
 Info: Max frequency for clock 'clk_proc_$glb_clk': 12.70 MHz (PASS at 12.00 MHz)
@@ -140,70 +140,70 @@ Info: Setting up routing queue.
 Info: Routing 14267 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |       21        978 |   21   978 |     13308|       0.31       0.31|
-Info:       2000 |      132       1867 |  111   889 |     12445|       0.17       0.47|
-Info:       3000 |      289       2710 |  157   843 |     11718|       0.27       0.74|
-Info:       4000 |      598       3401 |  309   691 |     11155|       0.36       1.10|
-Info:       5000 |     1054       3945 |  456   544 |     10750|       0.36       1.46|
-Info:       6000 |     1197       4802 |  143   857 |      9958|       0.77       2.23|
-Info:       7000 |     1248       5751 |   51   949 |      9077|       0.48       2.71|
-Info:       8000 |     1303       6696 |   55   945 |      8161|       0.33       3.03|
-Info:       9000 |     1477       7522 |  174   826 |      7397|       0.40       3.43|
-Info:      10000 |     1673       8326 |  196   804 |      6813|       0.53       3.95|
-Info:      11000 |     1923       9076 |  250   750 |      6251|       0.58       4.53|
-Info:      12000 |     2237       9762 |  314   686 |      5772|       0.56       5.09|
-Info:      13000 |     2607      10392 |  370   630 |      5447|       0.75       5.84|
-Info:      14000 |     3074      10925 |  467   533 |      5325|       0.90       6.74|
-Info:      15000 |     3549      11450 |  475   525 |      5085|       0.87       7.60|
-Info:      16000 |     3996      12003 |  447   553 |      4966|       1.00       8.60|
-Info:      17000 |     4475      12524 |  479   521 |      4814|       0.99       9.60|
-Info:      18000 |     4947      13052 |  472   528 |      4684|       0.92      10.52|
-Info:      19000 |     5413      13586 |  466   534 |      4674|       1.09      11.62|
-Info:      20000 |     5937      14062 |  524   476 |      4568|       0.92      12.53|
-Info:      21000 |     6443      14556 |  506   494 |      4478|       0.95      13.48|
-Info:      22000 |     6878      15121 |  435   565 |      4196|       0.94      14.42|
-Info:      23000 |     7353      15646 |  475   525 |      3920|       0.94      15.37|
-Info:      24000 |     7793      16206 |  440   560 |      3744|       0.85      16.21|
-Info:      25000 |     8370      16629 |  577   423 |      3629|       1.08      17.29|
-Info:      26000 |     8928      17071 |  558   442 |      3510|       0.97      18.26|
-Info:      27000 |     9278      17721 |  350   650 |      3187|       0.78      19.04|
-Info:      28000 |     9795      18204 |  517   483 |      2994|       0.97      20.01|
-Info:      29000 |    10335      18664 |  540   460 |      2808|       1.09      21.10|
-Info:      30000 |    10760      19239 |  425   575 |      2575|       1.02      22.12|
-Info:      31000 |    11118      19881 |  358   642 |      2300|       0.91      23.03|
-Info:      32000 |    11639      20360 |  521   479 |      2234|       1.12      24.15|
-Info:      33000 |    12107      20892 |  468   532 |      2118|       1.20      25.35|
-Info:      34000 |    12574      21425 |  467   533 |      2019|       1.15      26.50|
-Info:      35000 |    13062      21937 |  488   512 |      1978|       1.67      28.17|
-Info:      36000 |    13524      22475 |  462   538 |      1858|       1.21      29.38|
-Info:      37000 |    14059      22940 |  535   465 |      1791|       1.40      30.78|
-Info:      38000 |    14616      23383 |  557   443 |      1746|       1.27      32.05|
-Info:      39000 |    15020      23979 |  404   596 |      1691|       1.05      33.11|
-Info:      40000 |    15420      24579 |  400   600 |      1562|       1.04      34.15|
-Info:      41000 |    15862      25137 |  442   558 |      1507|       1.38      35.53|
-Info:      42000 |    16274      25725 |  412   588 |      1387|       1.09      36.62|
-Info:      43000 |    16743      26256 |  469   531 |      1291|       1.17      37.80|
-Info:      44000 |    17147      26852 |  404   596 |      1266|       1.17      38.97|
-Info:      45000 |    17631      27368 |  484   516 |      1222|       1.06      40.03|
-Info:      46000 |    18173      27826 |  542   458 |      1167|       1.32      41.34|
-Info:      47000 |    18693      28306 |  520   480 |      1158|       1.62      42.96|
-Info:      48000 |    19207      28792 |  514   486 |      1113|       1.70      44.66|
-Info:      49000 |    19700      29299 |  493   507 |      1048|       1.36      46.02|
-Info:      50000 |    20189      29810 |  489   511 |      1007|       1.49      47.51|
-Info:      51000 |    20718      30281 |  529   471 |       984|       1.13      48.64|
-Info:      52000 |    21174      30825 |  456   544 |       918|       1.02      49.66|
-Info:      53000 |    21657      31342 |  483   517 |       870|       1.13      50.79|
-Info:      54000 |    22185      31814 |  528   472 |       682|       1.08      51.88|
-Info:      55000 |    22616      32383 |  431   569 |       592|       1.00      52.87|
-Info:      56000 |    23102      32897 |  486   514 |       485|       1.15      54.02|
-Info:      57000 |    23549      33450 |  447   553 |       484|       1.11      55.13|
-Info:      58000 |    24105      33894 |  556   444 |       403|       1.29      56.43|
-Info:      59000 |    24574      34425 |  469   531 |       393|       1.60      58.02|
-Info:      60000 |    24972      35027 |  398   602 |       155|       1.70      59.72|
-Info:      61000 |    25447      35552 |  475   525 |        69|       2.15      61.87|
-Info:      61234 |    25556      35678 |  109   126 |         0|       0.43      62.30|
+Info:       1000 |       21        978 |   21   978 |     13308|       0.32       0.32|
+Info:       2000 |      132       1867 |  111   889 |     12445|       0.17       0.49|
+Info:       3000 |      289       2710 |  157   843 |     11718|       0.27       0.76|
+Info:       4000 |      598       3401 |  309   691 |     11155|       0.38       1.14|
+Info:       5000 |     1054       3945 |  456   544 |     10750|       0.38       1.52|
+Info:       6000 |     1197       4802 |  143   857 |      9958|       0.80       2.33|
+Info:       7000 |     1248       5751 |   51   949 |      9077|       0.51       2.84|
+Info:       8000 |     1303       6696 |   55   945 |      8161|       0.36       3.20|
+Info:       9000 |     1477       7522 |  174   826 |      7397|       0.43       3.63|
+Info:      10000 |     1673       8326 |  196   804 |      6813|       0.55       4.18|
+Info:      11000 |     1923       9076 |  250   750 |      6251|       0.60       4.78|
+Info:      12000 |     2237       9762 |  314   686 |      5772|       0.58       5.35|
+Info:      13000 |     2607      10392 |  370   630 |      5447|       0.87       6.22|
+Info:      14000 |     3074      10925 |  467   533 |      5325|       0.98       7.20|
+Info:      15000 |     3549      11450 |  475   525 |      5085|       0.94       8.14|
+Info:      16000 |     3996      12003 |  447   553 |      4966|       1.06       9.20|
+Info:      17000 |     4475      12524 |  479   521 |      4814|       1.02      10.23|
+Info:      18000 |     4947      13052 |  472   528 |      4684|       0.99      11.22|
+Info:      19000 |     5413      13586 |  466   534 |      4674|       1.13      12.35|
+Info:      20000 |     5937      14062 |  524   476 |      4568|       0.97      13.32|
+Info:      21000 |     6443      14556 |  506   494 |      4478|       0.96      14.28|
+Info:      22000 |     6878      15121 |  435   565 |      4196|       0.97      15.24|
+Info:      23000 |     7353      15646 |  475   525 |      3920|       0.95      16.19|
+Info:      24000 |     7793      16206 |  440   560 |      3744|       0.85      17.04|
+Info:      25000 |     8370      16629 |  577   423 |      3629|       1.06      18.11|
+Info:      26000 |     8928      17071 |  558   442 |      3510|       0.98      19.09|
+Info:      27000 |     9278      17721 |  350   650 |      3187|       0.80      19.90|
+Info:      28000 |     9795      18204 |  517   483 |      2994|       1.01      20.91|
+Info:      29000 |    10335      18664 |  540   460 |      2808|       1.12      22.02|
+Info:      30000 |    10760      19239 |  425   575 |      2575|       1.04      23.07|
+Info:      31000 |    11118      19881 |  358   642 |      2300|       0.92      23.99|
+Info:      32000 |    11639      20360 |  521   479 |      2234|       1.17      25.17|
+Info:      33000 |    12107      20892 |  468   532 |      2118|       1.24      26.41|
+Info:      34000 |    12574      21425 |  467   533 |      2019|       1.19      27.60|
+Info:      35000 |    13062      21937 |  488   512 |      1978|       1.74      29.34|
+Info:      36000 |    13524      22475 |  462   538 |      1858|       1.24      30.58|
+Info:      37000 |    14059      22940 |  535   465 |      1791|       1.42      32.00|
+Info:      38000 |    14616      23383 |  557   443 |      1746|       1.29      33.29|
+Info:      39000 |    15020      23979 |  404   596 |      1691|       1.05      34.34|
+Info:      40000 |    15420      24579 |  400   600 |      1562|       1.04      35.38|
+Info:      41000 |    15862      25137 |  442   558 |      1507|       1.40      36.78|
+Info:      42000 |    16274      25725 |  412   588 |      1387|       1.13      37.91|
+Info:      43000 |    16743      26256 |  469   531 |      1291|       1.19      39.10|
+Info:      44000 |    17147      26852 |  404   596 |      1266|       1.18      40.28|
+Info:      45000 |    17631      27368 |  484   516 |      1222|       1.09      41.37|
+Info:      46000 |    18173      27826 |  542   458 |      1167|       1.33      42.69|
+Info:      47000 |    18693      28306 |  520   480 |      1158|       1.68      44.37|
+Info:      48000 |    19207      28792 |  514   486 |      1113|       1.78      46.15|
+Info:      49000 |    19700      29299 |  493   507 |      1048|       1.38      47.54|
+Info:      50000 |    20189      29810 |  489   511 |      1007|       1.48      49.02|
+Info:      51000 |    20718      30281 |  529   471 |       984|       1.13      50.15|
+Info:      52000 |    21174      30825 |  456   544 |       918|       1.09      51.24|
+Info:      53000 |    21657      31342 |  483   517 |       870|       1.16      52.40|
+Info:      54000 |    22185      31814 |  528   472 |       682|       1.11      53.51|
+Info:      55000 |    22616      32383 |  431   569 |       592|       1.01      54.52|
+Info:      56000 |    23102      32897 |  486   514 |       485|       1.19      55.70|
+Info:      57000 |    23549      33450 |  447   553 |       484|       1.13      56.83|
+Info:      58000 |    24105      33894 |  556   444 |       403|       1.33      58.16|
+Info:      59000 |    24574      34425 |  469   531 |       393|       1.66      59.83|
+Info:      60000 |    24972      35027 |  398   602 |       155|       1.82      61.64|
+Info:      61000 |    25447      35552 |  475   525 |        69|       2.22      63.86|
+Info:      61234 |    25556      35678 |  109   126 |         0|       0.44      64.31|
 Info: Routing complete.
-Info: Router1 time 62.30s
+Info: Router1 time 64.31s
 Info: Checksum: 0xa6d31621
 
 Info: Critical path report for clock 'clk' (posedge -> posedge):

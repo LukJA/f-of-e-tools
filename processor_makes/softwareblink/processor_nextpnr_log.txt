@@ -57,12 +57,12 @@ Info:     at initial placer iter 1, wirelen = 868
 Info:     at initial placer iter 2, wirelen = 849
 Info:     at initial placer iter 3, wirelen = 850
 Info: Running main analytical placer.
-Info:     at iteration #1, type ALL: wirelen solved = 850, spread = 22292, legal = 23800; time = 0.05s
+Info:     at iteration #1, type ALL: wirelen solved = 850, spread = 22292, legal = 23800; time = 0.06s
 Info:     at iteration #2, type ALL: wirelen solved = 917, spread = 17077, legal = 18556; time = 0.07s
 Info:     at iteration #3, type ALL: wirelen solved = 1637, spread = 16311, legal = 18328; time = 0.08s
-Info:     at iteration #4, type ALL: wirelen solved = 2200, spread = 16229, legal = 17580; time = 0.07s
+Info:     at iteration #4, type ALL: wirelen solved = 2200, spread = 16229, legal = 17580; time = 0.08s
 Info:     at iteration #5, type ALL: wirelen solved = 3057, spread = 16502, legal = 17844; time = 0.08s
-Info:     at iteration #6, type ALL: wirelen solved = 4179, spread = 16391, legal = 17022; time = 0.06s
+Info:     at iteration #6, type ALL: wirelen solved = 4179, spread = 16391, legal = 17022; time = 0.07s
 Info:     at iteration #7, type ALL: wirelen solved = 4987, spread = 15210, legal = 16683; time = 0.07s
 Info:     at iteration #8, type ALL: wirelen solved = 5700, spread = 16049, legal = 16621; time = 0.06s
 Info:     at iteration #9, type ALL: wirelen solved = 6411, spread = 15899, legal = 16877; time = 0.06s
@@ -78,10 +78,10 @@ Info:     at iteration #18, type ALL: wirelen solved = 8562, spread = 13687, leg
 Info:     at iteration #19, type ALL: wirelen solved = 8580, spread = 13630, legal = 14892; time = 0.06s
 Info:     at iteration #20, type ALL: wirelen solved = 8757, spread = 13672, legal = 15059; time = 0.06s
 Info:     at iteration #21, type ALL: wirelen solved = 8911, spread = 13616, legal = 14810; time = 0.06s
-Info: HeAP Placer Time: 1.86s
-Info:   of which solving equations: 0.99s
+Info: HeAP Placer Time: 1.95s
+Info:   of which solving equations: 1.03s
 Info:   of which spreading cells: 0.22s
-Info:   of which strict legalisation: 0.14s
+Info:   of which strict legalisation: 0.15s
 
 Info: Running simulated annealing placer for refinement.
 Info:   at iteration #1: temp = 0.000000, timing cost = 1336, wirelen = 14745
@@ -91,7 +91,7 @@ Info:   at iteration #15: temp = 0.000000, timing cost = 1050, wirelen = 11628
 Info:   at iteration #20: temp = 0.000000, timing cost = 1048, wirelen = 11434
 Info:   at iteration #25: temp = 0.000000, timing cost = 1049, wirelen = 11359
 Info:   at iteration #26: temp = 0.000000, timing cost = 1049, wirelen = 11351 
-Info: SA placement time 3.44s
+Info: SA placement time 3.70s
 
 Info: Max frequency for clock               'clk': 14.51 MHz (PASS at 6.00 MHz)
 Info: Max frequency for clock 'clk_proc_$glb_clk': 12.49 MHz (PASS at 12.00 MHz)
@@ -130,27 +130,27 @@ Info: Setting up routing queue.
 Info: Routing 8290 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |       31        968 |   31   968 |      7329|       0.19       0.19|
-Info:       2000 |      136       1863 |  105   895 |      6454|       0.16       0.35|
-Info:       3000 |      266       2733 |  130   870 |      5635|       0.22       0.57|
-Info:       4000 |      559       3440 |  293   707 |      5043|       0.22       0.79|
-Info:       5000 |      972       4027 |  413   587 |      4580|       0.37       1.15|
-Info:       6000 |     1089       4910 |  117   883 |      3754|       0.40       1.55|
-Info:       7000 |     1395       5604 |  306   694 |      3255|       0.46       2.01|
-Info:       8000 |     1612       6387 |  217   783 |      2581|       0.40       2.41|
-Info:       9000 |     1859       7140 |  247   753 |      2016|       0.50       2.90|
-Info:      10000 |     2163       7836 |  304   696 |      1596|       0.65       3.55|
-Info:      11000 |     2614       8385 |  451   549 |      1353|       0.65       4.20|
-Info:      12000 |     3044       8955 |  430   570 |      1136|       0.79       4.99|
-Info:      13000 |     3552       9447 |  508   492 |      1015|       0.78       5.77|
-Info:      14000 |     4033       9966 |  481   519 |       895|       0.74       6.51|
-Info:      15000 |     4436      10563 |  403   597 |       603|       0.68       7.19|
-Info:      16000 |     4973      11026 |  537   463 |       493|       0.90       8.09|
-Info:      17000 |     5464      11535 |  491   509 |       433|       0.82       8.91|
-Info:      18000 |     5860      12139 |  396   604 |       160|       0.89       9.80|
-Info:      18176 |     5873      12303 |   13   164 |         0|       0.15       9.95|
+Info:       1000 |       31        968 |   31   968 |      7329|       0.20       0.20|
+Info:       2000 |      136       1863 |  105   895 |      6454|       0.17       0.37|
+Info:       3000 |      266       2733 |  130   870 |      5635|       0.23       0.60|
+Info:       4000 |      559       3440 |  293   707 |      5043|       0.23       0.83|
+Info:       5000 |      972       4027 |  413   587 |      4580|       0.39       1.22|
+Info:       6000 |     1089       4910 |  117   883 |      3754|       0.41       1.64|
+Info:       7000 |     1395       5604 |  306   694 |      3255|       0.49       2.12|
+Info:       8000 |     1612       6387 |  217   783 |      2581|       0.41       2.54|
+Info:       9000 |     1859       7140 |  247   753 |      2016|       0.50       3.04|
+Info:      10000 |     2163       7836 |  304   696 |      1596|       0.67       3.71|
+Info:      11000 |     2614       8385 |  451   549 |      1353|       0.69       4.40|
+Info:      12000 |     3044       8955 |  430   570 |      1136|       0.82       5.22|
+Info:      13000 |     3552       9447 |  508   492 |      1015|       0.81       6.03|
+Info:      14000 |     4033       9966 |  481   519 |       895|       0.80       6.83|
+Info:      15000 |     4436      10563 |  403   597 |       603|       0.71       7.54|
+Info:      16000 |     4973      11026 |  537   463 |       493|       0.93       8.47|
+Info:      17000 |     5464      11535 |  491   509 |       433|       0.83       9.30|
+Info:      18000 |     5860      12139 |  396   604 |       160|       0.91      10.21|
+Info:      18176 |     5873      12303 |   13   164 |         0|       0.17      10.38|
 Info: Routing complete.
-Info: Router1 time 9.95s
+Info: Router1 time 10.38s
 Info: Checksum: 0x6ad4c6ea
 
 Info: Critical path report for clock 'clk' (posedge -> posedge):

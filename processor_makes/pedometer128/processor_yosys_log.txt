@@ -13489,6 +13489,6 @@ found and reported 4 problems.
 20. Executing JSON backend.
 
 Warnings: 4 unique messages, 4 total
-End of script. Logfile hash: 593c8ef505, CPU: user 9.77s system 0.16s, MEM: 227.40 MB peak
+End of script. Logfile hash: 593c8ef505, CPU: user 10.54s system 0.12s, MEM: 243.24 MB peak
 Yosys 0.9+2406 (git sha1 c98cde88, clang 10.0.0-4ubuntu1 -fPIC -Os)
 Time spent: 18% 22x opt_clean (1 sec), 17% 24x opt_expr (1 sec), ...
