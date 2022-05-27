@@ -15,14 +15,14 @@ benchmark(){
 
 echo "Benchmarking resource usage started"
 echo "Benchmarking 0/5"
-benchmark bubblesort
-echo "Benchmarking 1/5"
-benchmark LPF128
-echo "Benchmarking 2/5"
-benchmark pedometer128
-echo "Benchmarking 3/5"
-benchmark schlieren128
-echo "Benchmarking 4/5"
 benchmark softwareblink
+echo "Benchmarking 1/5"
+benchmark bubblesort
+echo "Benchmarking 2/5"
+benchmark LPF128
+echo "Benchmarking 3/5"
+benchmark pedometer128
+echo "Benchmarking 4/5"
+benchmark schlieren128
 echo "Benchmarking resource usage finished"
 
