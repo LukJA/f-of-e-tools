@@ -70,7 +70,8 @@ module branch_predictor(
 	/*
 	 *	internal state
 	 */
-	reg [1:0]	s;
+	parameter COLD2 = 2'b00, COLD1 = 2'b01, HOT1 = 2'b10, HOT2 = 2'b11;
+	reg [1:0]	state;
 
 	reg		branch_mem_sig_reg;
 
@@ -85,7 +86,7 @@ module branch_predictor(
 	 *	modules in the design and to thereby set the values.
 	 */
 	initial begin
-		s = 2'b00;
+		state = COLD2;
 		branch_mem_sig_reg = 1'b0;
 	end
 
@@ -98,13 +99,25 @@ module branch_predictor(
 	 *	therefore can use branch_mem_sig as every branch is followed by
 	 *	a bubble, so a 0 to 1 transition
 	 */
+
+	/* Original Implementation */
+	/* always @(posedge clk) begin
+	 *	if (branch_mem_sig_reg) begin
+	 *		s[1] <= (s[1]&s[0]) | (s[0]&actual_branch_decision) | (s[1]&actual_branch_decision);
+	 *		s[0] <= (s[1]&(!s[0])) | ((!s[0])&actual_branch_decision) | (s[1]&actual_branch_decision);
+	 *	end
+	 * end
+	 */
+
 	always @(posedge clk) begin
-		if (branch_mem_sig_reg) begin
-			s[1] <= (s[1]&s[0]) | (s[0]&actual_branch_decision) | (s[1]&actual_branch_decision);
-			s[0] <= (s[1]&(!s[0])) | ((!s[0])&actual_branch_decision) | (s[1]&actual_branch_decision);
-		end
+		case(state)
+			COLD2 : state = (actual_branch_decision) ? COLD1 : COLD2;
+			COLD1 : state = (actual_branch_decision) ? HOT1 : COLD2;
+			HOT1  : state = (actual_branch_decision) ? HOT2 : COLD1;
+			HOT2  : state = (actual_branch_decision) ? HOT2 : HOT1;
+		endcase
 	end
 
 	assign branch_addr = in_addr + offset;
-	assign prediction = s[1] & branch_decode_sig;
+	assign prediction = state[1] & branch_decode_sig; // true for HOT1, HOT2
 endmodule
