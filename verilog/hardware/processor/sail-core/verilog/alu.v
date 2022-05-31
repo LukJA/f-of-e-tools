@@ -131,12 +131,14 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 
 	end
 
+	wire [31:0] csrrc_and_bitwise_and = (A ^ {32{(`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC == ALUctl[3:0])}}) & B;
+
 	always @(ALUctl, A, B, adder_output) begin
 		case (ALUctl[3:0])
 			/*
 			 *	AND (the fields also match ANDI and LUI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:	ALUOut = A & B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:	ALUOut = csrrc_and_bitwise_and;
 
 			/*
 			 *	OR (the fields also match ORI)
@@ -191,7 +193,7 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	CSRRC only
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC:	ALUOut = (~A) & B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC:	ALUOut = csrrc_and_bitwise_and;
 
 			/*
 			 *	Should never happen.
