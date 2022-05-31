@@ -170,31 +170,41 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 	
 	wire select0;
 	wire select1;
-	wire select2;
-	
-	wire[31:0] out1;
-	wire[31:0] out2;
-	wire[31:0] out3;
-	wire[31:0] out4;
-	wire[31:0] out5;
-	wire[31:0] out6;
+
 	/* a is sign_mask_buf[2], b is sign_mask_buf[1], c is sign_mask_buf[0]
 	 * d is addr_buf[1], e is addr_buf[0]
 	 */
 	
 	assign select0 = (~sign_mask_buf[2] & ~sign_mask_buf[1] & ~addr_buf[1] & addr_buf[0]) | (~sign_mask_buf[2] & addr_buf[1] & addr_buf[0]) | (~sign_mask_buf[2] & sign_mask_buf[1] & addr_buf[1]); //~a~b~de + ~ade + ~abd
 	assign select1 = (~sign_mask_buf[2] & ~sign_mask_buf[1] & addr_buf[1]) | (sign_mask_buf[2] & sign_mask_buf[1]); // ~a~bd + ab
-	assign select2 = sign_mask_buf[1]; //b
 	
-	assign out1 = (select0) ? ((sign_mask_buf[3]==1'b1) ? {{24{word_buf[15]}}, word_buf[15:8]} : {24'b0, word_buf[15:8]}) : ((sign_mask_buf[3]==1'b1) ? {{24{word_buf[7]}}, word_buf[7:0]} : {24'b0, word_buf[7:0]});
-	assign out2 = (select0) ? ((sign_mask_buf[3]==1'b1) ? {{24{word_buf[31]}}, word_buf[31:24]} : {24'b0, word_buf[31:24]}) : ((sign_mask_buf[3]==1'b1) ? {{24{word_buf[23]}}, word_buf[23:16]} : {24'b0, word_buf[23:16]}); 
-	assign out3 = (select0) ? ((sign_mask_buf[3]==1'b1) ? {{16{word_buf[31]}}, word_buf[31:24], word_buf[23:16]} : {16'b0, word_buf[31:24], word_buf[23:16]}) : ((sign_mask_buf[3]==1'b1) ? {{16{word_buf[15]}}, word_buf[15:8], word_buf[7:0]} : {16'b0, word_buf[15:8], word_buf[7:0]});
-	assign out4 = (select0) ? 32'b0 : {word_buf[31:24], word_buf[23:16], word_buf[15:8], word_buf[7:0]};
-	
-	assign out5 = (select1) ? out2 : out1;
-	assign out6 = (select1) ? out4 : out3;
-	
-	assign read_buf = (select2) ? out6 : out5;
+	assign read_buf = (sign_mask_buf[1]) ?
+        (select1 ?
+            ((select0) ?
+                32'b0:
+                {word_buf[31:24], word_buf[23:16], word_buf[15:8], word_buf[7:0]}):
+            ((select0) ?
+                (sign_mask_buf[3] ?
+                    {{16{word_buf[31]}}, word_buf[31:24], word_buf[23:16]}:
+                    {16'b0, word_buf[31:24], word_buf[23:16]}):
+                (sign_mask_buf[3] ?
+                    {{16{word_buf[15]}}, word_buf[15:8], word_buf[7:0]}:
+                    {16'b0, word_buf[15:8], word_buf[7:0]}))):
+        (select1 ?
+            ((select0) ?
+                (sign_mask_buf[3] ?
+                    {{24{word_buf[31]}}, word_buf[31:24]}:
+                    {24'b0, word_buf[31:24]}):
+                (sign_mask_buf[3] ?
+                    {{24{word_buf[23]}}, word_buf[23:16]}:
+                    {24'b0, word_buf[23:16]})):
+            ((select0) ?
+                (sign_mask_buf[3] ?
+                    {{24{word_buf[15]}}, word_buf[15:8]}:
+                    {24'b0, word_buf[15:8]}):
+                (sign_mask_buf[3] ?
+                    {{24{word_buf[7]}}, word_buf[7:0]}:
+                    {24'b0, word_buf[7:0]})));
 	
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
