@@ -50,6 +50,7 @@ module top (led);
 	
 	wire		clk_hfosc;
 	wire 		clk_pll;
+	wire  		clk;
 	wire 		PLLOK;
 	reg		ENCLKHF		= 1'b1;	// Plock enable
 	reg		CLKHF_POWERUP	= 1'b1;	// Power up the HFOSC circuit
@@ -79,7 +80,7 @@ module top (led);
 	)
 	PLLInst0 (
 		.REFERENCECLK(clk_hfosc),
-		.BYPASS("1bi"),
+		.BYPASS("1b0"),
 		.PLLOUTGLOBAL(clk_pll),
 		.LOCK(PLLOK),
 		.RESETB("1b1")
@@ -90,7 +91,7 @@ module top (led);
 	 */
 	
 	SB_GB PLLClkInst0 (
-		.USER_SIGNAL_TO_GLOBAL_BUFFER (PLLClock),
+		.USER_SIGNAL_TO_GLOBAL_BUFFER (clk_pll),
 		.GLOBAL_BUFFER_OUTPUT (clk)
 	);
 	assign clk_proc_local = (data_clk_stall) ? 1'b1 : clk;
