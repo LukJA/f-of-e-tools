@@ -76,7 +76,7 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	end
 
 	wire adder_input_carry;
-	assign adder_input_carry = (ALUctl[3:0] == `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB);
+	assign adder_input_carry = (ALUctl[3:1] == 3'b011);  // Corresponds to SUB and SLT
 	wire [31:0] adder_input_b;
 	assign adder_input_b = B ^ {32{adder_input_carry}};
 	wire [31:0] adder_output;
@@ -111,7 +111,9 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	SLT (the fields also matches all the other SLT variants)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT:	ALUOut = $signed(A) < $signed(B) ? 32'b1 : 32'b0;
+            `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT: begin
+                ALUOut = adder_output[31] == 1 ? 32'b1 : 32'b0;
+            end
 
 			/*
 			 *	SRL (the fields also matches the other SRL variants)
