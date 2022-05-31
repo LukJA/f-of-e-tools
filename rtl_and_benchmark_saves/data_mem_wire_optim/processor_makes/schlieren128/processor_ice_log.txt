@@ -1,0 +1,192 @@
+icetime:
+// Reading input .pcf file..
+// Reading input .asc file..
+// Reading 5k chipdb file..
+// Creating timing netlist..
+Warning: timing analysis not supported for cell type HFOSC
+
+icetime topological timing analysis report
+==========================================
+
+Report for critical path:
+-------------------------
+
+        lc40_1_16_1 (LogicCell40) [clk] -> lcout: 1.491 ns
+     1.491 ns net_3251 (processor.ex_mem_out[151])
+        t2676 (LocalMux) I -> O: 1.099 ns
+        inmux_1_17_9108_9182 (InMux) I -> O: 0.662 ns
+        lc40_1_17_7 (LogicCell40) in0 -> lcout: 1.285 ns
+     4.537 ns net_3463 (processor.forwarding_unit.MEM_CSRR_SB_LUT4_I3_I0)
+        t2726 (LocalMux) I -> O: 1.099 ns
+        inmux_1_18_9261_9324 (InMux) I -> O: 0.662 ns
+        lc40_1_18_6 (LogicCell40) in1 -> lcout: 1.232 ns
+     7.530 ns net_3670 (processor.forwarding_unit.MEM_CSRR_SB_LUT4_I3_O)
+        t2795 (LocalMux) I -> O: 1.099 ns
+        inmux_1_17_9121_9165 (InMux) I -> O: 0.662 ns
+        lc40_1_17_4 (LogicCell40) in1 -> lcout: 1.232 ns
+    10.523 ns net_3460 (processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I1)
+        odrv_1_17_3460_9235 (Odrv4) I -> O: 0.649 ns
+        t2756 (Span4Mux_h0) I -> O: 0.252 ns
+        t2755 (LocalMux) I -> O: 1.099 ns
+        inmux_5_17_24776_24841 (InMux) I -> O: 0.662 ns
+        lc40_5_17_6 (LogicCell40) in0 -> lcout: 1.285 ns
+    14.470 ns net_20906 (processor.mfwd2)
+        odrv_5_17_20906_20929 (Odrv4) I -> O: 0.649 ns
+        t5851 (Span4Mux_h4) I -> O: 0.543 ns
+        t5850 (Span4Mux_v3) I -> O: 0.583 ns
+        t5849 (LocalMux) I -> O: 1.099 ns
+        inmux_8_12_35044_35054 (InMux) I -> O: 0.662 ns
+        t1102 (CascadeMux) I -> O: 0.000 ns
+        lc40_8_12_0 (LogicCell40) in2 -> lcout: 1.205 ns
+    19.212 ns net_31147 (processor.mem_fwd2_mux_out[2])
+        t7640 (LocalMux) I -> O: 1.099 ns
+        inmux_8_12_35035_35071 (InMux) I -> O: 0.662 ns
+        lc40_8_12_3 (LogicCell40) in1 -> lcout: 1.232 ns
+    22.205 ns net_31150 (data_WrData[2])
+        odrv_8_12_31150_35121 (Odrv4) I -> O: 0.649 ns
+        t7700 (Span4Mux_h4) I -> O: 0.543 ns
+        t7699 (Span4Mux_v3) I -> O: 0.583 ns
+        t7698 (LocalMux) I -> O: 1.099 ns
+        inmux_16_15_66037_66075 (InMux) I -> O: 0.662 ns
+        t2168 (CascadeMux) I -> O: 0.000 ns
+        lc40_16_15_1 (LogicCell40) in2 -> lcout: 1.205 ns
+    26.947 ns net_62163 (processor.alu_mux_out[2])
+        odrv_16_15_62163_58469 (Odrv4) I -> O: 0.649 ns
+        t14488 (Span4Mux_v1) I -> O: 0.344 ns
+        t14487 (LocalMux) I -> O: 1.099 ns
+        inmux_13_15_54561_54607 (InMux) I -> O: 0.662 ns
+        lc40_13_15_5 (LogicCell40) in1 -> lcout: 1.232 ns
+    30.933 ns net_50676 (processor.alu_main.adder_input_b[2])
+        t11978 (LocalMux) I -> O: 1.099 ns
+        inmux_12_15_50741_50764 (InMux) I -> O: 0.662 ns
+        lc40_12_15_3 (LogicCell40) in1 -> carryout: 0.675 ns
+    33.370 ns net_50762 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[4])
+        lc40_12_15_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    33.648 ns net_50768 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[5])
+        lc40_12_15_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    33.927 ns net_50774 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[6])
+        lc40_12_15_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    34.205 ns net_50780 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[7])
+        lc40_12_15_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    34.483 ns net_50786 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[8])
+        t1490 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        lc40_12_16_0 (LogicCell40) carryin -> carryout: 0.278 ns
+    35.317 ns net_50867 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[9])
+        lc40_12_16_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    35.595 ns net_50873 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[10])
+        lc40_12_16_2 (LogicCell40) carryin -> carryout: 0.278 ns
+    35.874 ns net_50879 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[11])
+        lc40_12_16_3 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.152 ns net_50885 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[12])
+        lc40_12_16_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.430 ns net_50891 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[13])
+        lc40_12_16_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.708 ns net_50897 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[14])
+        lc40_12_16_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.986 ns net_50903 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[15])
+        lc40_12_16_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    37.264 ns net_50909 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[16])
+        t1498 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        lc40_12_17_0 (LogicCell40) carryin -> carryout: 0.278 ns
+    38.099 ns net_50990 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[17])
+        lc40_12_17_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    38.377 ns net_50996 (processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[18])
+        inmux_12_17_50996_51006 (InMux) I -> O: 0.662 ns
+        lc40_12_17_2 (LogicCell40) in3 -> lcout: 0.874 ns
+    39.913 ns net_47088 (processor.alu_main.adder_output[17])
+        t11418 (LocalMux) I -> O: 1.099 ns
+        inmux_13_18_54938_54963 (InMux) I -> O: 0.662 ns
+        lc40_13_18_3 (LogicCell40) in0 -> lcout: 1.285 ns
+    42.959 ns net_51043 (processor.alu_main.ALUOut_SB_LUT4_O_21_I3_SB_LUT4_O_I3_SB_LUT4_O_I2)
+        t12011 (LocalMux) I -> O: 1.099 ns
+        inmux_13_19_55038_55086 (InMux) I -> O: 0.662 ns
+        lc40_13_19_3 (LogicCell40) in0 -> lcout: 1.285 ns
+    46.006 ns net_51166 (processor.alu_main.ALUOut_SB_LUT4_O_21_I3_SB_LUT4_O_I3)
+        t12024 (LocalMux) I -> O: 1.099 ns
+        inmux_14_20_59015_59059 (InMux) I -> O: 0.662 ns
+        t1930 (CascadeMux) I -> O: 0.000 ns
+        lc40_14_20_6 (LogicCell40) in2 -> lcout: 1.205 ns
+    48.972 ns net_55123 (processor.alu_main.ALUOut_SB_LUT4_O_21_I3)
+        t12927 (LocalMux) I -> O: 1.099 ns
+        inmux_14_21_59125_59169 (InMux) I -> O: 0.662 ns
+        lc40_14_21_4 (LogicCell40) in1 -> lcout: 1.232 ns
+    51.966 ns net_55244 (processor.alu_result[17])
+        t12938 (LocalMux) I -> O: 1.099 ns
+        inmux_13_21_55309_55353 (InMux) I -> O: 0.662 ns
+        lc40_13_21_6 (LogicCell40) in3 -> lcout: 0.874 ns
+    54.601 ns net_51415 (data_addr[17])
+        odrv_13_21_51415_55142 (Odrv4) I -> O: 0.649 ns
+        t12068 (Span4Mux_v4) I -> O: 0.649 ns
+        t12067 (Span4Mux_v1) I -> O: 0.344 ns
+        t12066 (LocalMux) I -> O: 1.099 ns
+        inmux_14_13_58136_58191 (InMux) I -> O: 0.662 ns
+        lc40_14_13_5 (LogicCell40) in1 -> lcout: 1.232 ns
+    59.237 ns net_54261 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_I3_SB_LUT4_O_I3)
+        odrv_14_13_54261_50564 (Odrv4) I -> O: 0.649 ns
+        t12683 (Span4Mux_v1) I -> O: 0.344 ns
+        t12682 (LocalMux) I -> O: 1.099 ns
+        inmux_12_14_50612_50637 (InMux) I -> O: 0.662 ns
+        lc40_12_14_2 (LogicCell40) in3 -> lcout: 0.874 ns
+    62.866 ns net_46719 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_I3)
+        t11380 (LocalMux) I -> O: 1.099 ns
+        inmux_12_14_50615_50623 (InMux) I -> O: 0.662 ns
+        lc40_12_14_0 (LogicCell40) in1 -> lcout: 1.232 ns
+    65.859 ns net_46717 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0)
+        odrv_12_14_46717_50190 (Odrv12) I -> O: 1.232 ns
+        t11385 (LocalMux) I -> O: 1.099 ns
+        inmux_12_21_51469_51496 (InMux) I -> O: 0.662 ns
+        lc40_12_21_2 (LogicCell40) in1 -> lcout: 1.232 ns
+    70.084 ns net_47580 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O)
+        odrv_12_21_47580_51319 (Odrv4) I -> O: 0.649 ns
+        t11517 (Span4Mux_v4) I -> O: 0.649 ns
+        t11516 (Span4Mux_v4) I -> O: 0.649 ns
+        t11515 (Span4Mux_h4) I -> O: 0.543 ns
+        t11514 (Span4Mux_h4) I -> O: 0.543 ns
+        t11513 (Span4Mux_v3) I -> O: 0.583 ns
+        t11512 (LocalMux) I -> O: 1.099 ns
+        inmux_5_7_23560_23621 (CEMux) I -> O: 0.702 ns
+    75.501 ns net_23621 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O)
+        lc40_5_7_6 (LogicCell40) ce [setup]: 0.000 ns
+    75.501 ns net_19676 (led[5]$SB_IO_OUT)
+
+Resolvable net names on path:
+     1.491 ns ..  3.252 ns processor.ex_mem_out[151]
+     4.537 ns ..  6.298 ns processor.forwarding_unit.MEM_CSRR_SB_LUT4_I3_I0
+     7.530 ns ..  9.292 ns processor.forwarding_unit.MEM_CSRR_SB_LUT4_I3_O
+    10.523 ns .. 13.186 ns processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I1
+    14.470 ns .. 18.007 ns processor.mfwd2
+    19.212 ns .. 20.973 ns processor.mem_fwd2_mux_out[2]
+    22.205 ns .. 25.741 ns data_WrData[2]
+    26.947 ns .. 29.702 ns processor.alu_mux_out[2]
+    30.933 ns .. 32.695 ns processor.alu_main.adder_input_b[2]
+    33.370 ns .. 33.370 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[4]
+    33.648 ns .. 33.648 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[5]
+    33.927 ns .. 33.927 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[6]
+    34.205 ns .. 34.205 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[7]
+    34.483 ns .. 35.039 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[8]
+    35.317 ns .. 35.317 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[9]
+    35.595 ns .. 35.595 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[10]
+    35.874 ns .. 35.874 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[11]
+    36.152 ns .. 36.152 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[12]
+    36.430 ns .. 36.430 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[13]
+    36.708 ns .. 36.708 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[14]
+    36.986 ns .. 36.986 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[15]
+    37.264 ns .. 37.820 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[16]
+    38.099 ns .. 38.099 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[17]
+    38.377 ns .. 39.039 ns processor.alu_main.adder_input_carry_SB_CARRY_CI_CO[18]
+    39.913 ns .. 41.675 ns processor.alu_main.adder_output[17]
+    42.959 ns .. 44.721 ns processor.alu_main.ALUOut_SB_LUT4_O_21_I3_SB_LUT4_O_I3_SB_LUT4_O_I2
+    46.006 ns .. 47.767 ns processor.alu_main.ALUOut_SB_LUT4_O_21_I3_SB_LUT4_O_I3
+    48.972 ns .. 50.734 ns processor.alu_main.ALUOut_SB_LUT4_O_21_I3
+    51.966 ns .. 53.727 ns processor.alu_result[17]
+    54.601 ns .. 58.005 ns data_addr[17]
+    59.237 ns .. 61.992 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_I3_SB_LUT4_O_I3
+    62.866 ns .. 64.627 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_I3
+    65.859 ns .. 68.852 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0
+    70.084 ns .. 75.501 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O
+                  lcout -> led[5]$SB_IO_OUT
+
+Total number of logic levels: 34
+Total path delay: 75.50 ns (13.24 MHz)
+
+icepack:
