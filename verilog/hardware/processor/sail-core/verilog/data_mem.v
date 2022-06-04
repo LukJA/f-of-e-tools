@@ -115,20 +115,6 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 	assign			addr_buf_block_addr	= addr_buf[11:2];
 
 	/*
-	 *	Byte select decoder
-	 */
-	wire bdec_sig0;
-	wire bdec_sig1;
-	wire bdec_sig2;
-	wire bdec_sig3;
-
-	assign bdec_sig0 = (~addr_buf[1]) & (~addr_buf[0]);
-	assign bdec_sig1 = (~addr_buf[1]) & (addr_buf[0]);
-	assign bdec_sig2 = (addr_buf[1]) & (~addr_buf[0]);
-	assign bdec_sig3 = (addr_buf[1]) & (addr_buf[0]);
-
-
-	/*
 	 *	Constructing the word to be replaced for write byte
 	 */
 	wire[7:0] byte_r0;
@@ -136,10 +122,10 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 	wire[7:0] byte_r2;
 	wire[7:0] byte_r3;
  
-	assign byte_r0 = (bdec_sig0==1'b1) ? write_data_buffer[7:0] : word_buf[7:0];
-	assign byte_r1 = (bdec_sig1==1'b1) ? write_data_buffer[7:0] : word_buf[15:8];
-	assign byte_r2 = (bdec_sig2==1'b1) ? write_data_buffer[7:0] : word_buf[23:16];
-	assign byte_r3 = (bdec_sig3==1'b1) ? write_data_buffer[7:0] : word_buf[31:24];
+	assign byte_r0 = (~addr_buf[1] & ~addr_buf[0]) ? write_data_buffer[7:0] : word_buf[7:0];
+	assign byte_r1 = (~addr_buf[1] & addr_buf[0]) ? write_data_buffer[7:0] : word_buf[15:8];
+	assign byte_r2 = (addr_buf[1] & ~addr_buf[0]) ? write_data_buffer[7:0] : word_buf[23:16];
+	assign byte_r3 = (addr_buf[1] & addr_buf[0]) ? write_data_buffer[7:0] : word_buf[31:24];
 
 	/*
 	 *	For write halfword
@@ -152,18 +138,12 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 
 	/* a is sign_mask_buf[2], b is sign_mask_buf[1], c is sign_mask_buf[0] */
 	wire write_select0;
-	wire write_select1;
-	
-	wire[31:0] write_out1;
-	wire[31:0] write_out2;
 	
 	assign write_select0 = ~sign_mask_buf[2] & sign_mask_buf[1];
-	assign write_select1 = sign_mask_buf[2];
 	
-	assign write_out1 = (write_select0) ? {halfword_r1, halfword_r0} : {byte_r3, byte_r2, byte_r1, byte_r0};
-	assign write_out2 = (write_select0) ? 32'b0 : write_data_buffer;
-	
-	assign replacement_word = (write_select1) ? write_out2 : write_out1;
+	assign replacement_word = (sign_mask_buf[2]) ?
+        ((write_select0) ? 32'b0 : write_data_buffer):
+        ((write_select0) ? {halfword_r1, halfword_r0} : {byte_r3, byte_r2, byte_r1, byte_r0});
 	/*
 	 *	Combinational logic for generating 32-bit read data
 	 */
@@ -176,8 +156,6 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 	wire[31:0] out2;
 	wire[31:0] out3;
 	wire[31:0] out4;
-	wire[31:0] out5;
-	wire[31:0] out6;
 	/* a is sign_mask_buf[2], b is sign_mask_buf[1], c is sign_mask_buf[0]
 	 * d is addr_buf[1], e is addr_buf[0]
 	 */
@@ -191,10 +169,7 @@ module data_mem (clk, addr, write_data, memwrite, memread, sign_mask, read_data,
 	assign out3 = (select0) ? ((sign_mask_buf[3]==1'b1) ? {{16{word_buf[31]}}, word_buf[31:24], word_buf[23:16]} : {16'b0, word_buf[31:24], word_buf[23:16]}) : ((sign_mask_buf[3]==1'b1) ? {{16{word_buf[15]}}, word_buf[15:8], word_buf[7:0]} : {16'b0, word_buf[15:8], word_buf[7:0]});
 	assign out4 = (select0) ? 32'b0 : {word_buf[31:24], word_buf[23:16], word_buf[15:8], word_buf[7:0]};
 	
-	assign out5 = (select1) ? out2 : out1;
-	assign out6 = (select1) ? out4 : out3;
-	
-	assign read_buf = (select2) ? out6 : out5;
+	assign read_buf = (select2) ? ((select1) ? out4 : out3) : ((select1) ? out2 : out1);
 	
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
