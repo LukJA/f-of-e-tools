@@ -44,16 +44,22 @@
 module top (led);
 	output [7:0]	led;
 
-	wire		clk_proc;
-	wire		clk_proc_local;
-	wire		data_clk_stall;
-	
 	wire		clk_hfosc;
 	wire 		clk_pll;
 	wire  		clk;
 	wire 		PLLOK;
+
 	reg		ENCLKHF		= 1'b1;	// Plock enable
 	reg		CLKHF_POWERUP	= 1'b1;	// Power up the HFOSC circuit
+
+	reg [7:0] cpu_data;
+	assign led[0] = clk;
+	assign led[1] = cpu_data[0];
+
+
+	wire		clk_proc;
+	wire		clk_proc_local;
+	wire		data_clk_stall;
 
 
 	/* Clocking and Clock Routing */
@@ -69,13 +75,13 @@ module top (led);
 
 	/*
 	 * Using the PLL to overclock 
-	 * 15.938 MHz setting
+	 * 24 MHz setting - 18.28 mS
 	 */
 	SB_PLL40_CORE #(
 		.FEEDBACK_PATH("SIMPLE"),
 		.DIVR(4'b0000),		// DIVR =  0
-		.DIVF(7'b1010100),	// DIVF = 84
-		.DIVQ(3'b110),		// DIVQ =  6
+		.DIVF(7'b0111111),	// DIVF = 63
+		.DIVQ(3'b101),		// DIVQ =  5
 		.FILTER_RANGE(3'b001)	// FILTER_RANGE = 1
 	)
 	PLLInst0 (
@@ -138,7 +144,7 @@ module top (led);
 			.memread(data_memread), 
 			.read_data(data_out),
 			.sign_mask(data_sign_mask),
-			.led(led),
+			.led(cpu_data),
 			.clk_stall(data_clk_stall)
 		);
 
