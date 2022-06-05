@@ -58,14 +58,6 @@ module regfile(clk, write, wrAddr, wrData, rdAddrA, rdDataA, rdAddrB, rdDataB);
 	 *	register file, 32 x 32-bit registers
 	 */
 	reg [31:0]	regfile[31:0];
-	/* hack for looking at output */
-	// generate
-	// 	genvar idx;
-	// 		for(idx = 0; idx < 32; idx = idx+1) begin: register
-	// 			wire [31:0] tmp;
-	// 			assign tmp = regfile[idx];
-	// 	end
-	// endgenerate
 
 	/*
 	 *	buffer to store address at each positive clock edge
@@ -78,7 +70,6 @@ module regfile(clk, write, wrAddr, wrData, rdAddrA, rdDataA, rdAddrB, rdDataB);
 	 */
 	reg [31:0]	regDatA;
 	reg [31:0]	regDatB;
-	//reg [31:0]	wrAddr_buf;
 	reg [4:0] wrAddr_buf;
 	reg [31:0]	wrData_buf;
 	reg		write_buf;
