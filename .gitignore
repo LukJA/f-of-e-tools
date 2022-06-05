@@ -1,0 +1,10 @@
+*.map
+*.o
+*.sr
+*-sf
+*-sf.i
+*.hex
+*.bin
+*.blif
+*.txt
+/.vscode
