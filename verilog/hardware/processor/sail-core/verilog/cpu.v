@@ -493,6 +493,7 @@ module cpu(
 			.out(pc_mux0)
 		);
 
+	/* This seems like it may be an issue in the sing-cycle loop */
 	wire[31:0] mem_regwb_mux_out; //TODO copy of wb_mux but in mem stage, move back and cleanup
 	//A copy of the writeback mux, but in MEM stage //TODO move back and cleanup
 	mux2to1 mem_regwb_mux(
@@ -510,6 +511,8 @@ module cpu(
 	assign inst_mem_in = pc_out;
 
 	//Data Memory Connections
+	// these seem to skip the pipeline? doesnt match the pdf
+	// try getting these from the correct stage?
 	assign data_mem_addr = lui_result;
 	assign data_mem_WrData = wb_fwd2_mux_out;
 	assign data_mem_memwrite = ex_cont_mux_out[4];
