@@ -93,6 +93,7 @@ module branch_predictor(
 		branch_mem_sig_reg = 1'b0;
 	end
 
+	/* note this is neg-edge locked in */
 	always @(negedge clk) begin
 		branch_mem_sig_reg <= branch_mem_sig;
 	end
@@ -104,13 +105,14 @@ module branch_predictor(
 	 */
 
 	/* Original Implementation */
-	/* always @(posedge clk) begin
-	 *	if (branch_mem_sig_reg) begin
-	 *		s[1] <= (s[1]&s[0]) | (s[0]&actual_branch_decision) | (s[1]&actual_branch_decision);
-	 *		s[0] <= (s[1]&(!s[0])) | ((!s[0])&actual_branch_decision) | (s[1]&actual_branch_decision);
-	 *	end
-	 * end
-	 */
+	// always @(posedge clk) begin
+	// 	if (branch_mem_sig_reg) begin
+	// 		state[1] <= (state[1]&state[0]) | (state[0]&actual_branch_decision) | (state[1]&actual_branch_decision);
+	// 		state[0] <= (state[1]&(!state[0])) | ((!state[0])&actual_branch_decision) | (state[1]&actual_branch_decision);
+	// 	end
+	// end
+	// assign prediction = state[1] & branch_decode_sig;
+	
 
 	/* Simplified Implementation */
 
