@@ -67,6 +67,9 @@ module branch_predictor(
 	output [31:0]	branch_addr;
 	output		prediction;
 
+	/* Addr choice */
+	assign branch_addr = in_addr + offset;
+
 	/*
 	 *	internal state
 	 */
@@ -109,15 +112,18 @@ module branch_predictor(
 	 * end
 	 */
 
-	always @(posedge clk) begin
-		case(state)
-			COLD2 : state = (actual_branch_decision) ? COLD1 : COLD2;
-			COLD1 : state = (actual_branch_decision) ? HOT1 : COLD2;
-			HOT1  : state = (actual_branch_decision) ? HOT2 : COLD1;
-			HOT2  : state = (actual_branch_decision) ? HOT2 : HOT1;
-		endcase
-	end
+	/* Simplified Implementation */
 
-	assign branch_addr = in_addr + offset;
+	always @(posedge clk) begin
+		if (branch_mem_sig_reg) begin
+			case(state)
+				COLD2 : state = (actual_branch_decision) ? COLD1 : COLD2;
+				COLD1 : state = (actual_branch_decision) ? HOT1 : COLD2;
+				HOT1  : state = (actual_branch_decision) ? HOT2 : COLD1;
+				HOT2  : state = (actual_branch_decision) ? HOT2 : HOT1;
+			endcase
+		end
+	end
 	assign prediction = state[1] & branch_decode_sig; // true for HOT1, HOT2
+
 endmodule
