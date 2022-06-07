@@ -116,17 +116,17 @@ module branch_predictor(
 
 	/* Simplified Implementation - BVERIFY FF 212029 */
 
-	always @(posedge clk) begin
-		if (branch_mem_sig_reg) begin
-			case(state)
-				COLD2 : state = (actual_branch_decision) ? COLD1 : COLD2;
-				COLD1 : state = (actual_branch_decision) ? HOT1 : COLD2;
-				HOT1  : state = (actual_branch_decision) ? HOT2 : COLD1;
-				HOT2  : state = (actual_branch_decision) ? HOT2 : HOT1;
-			endcase
-		end
-	end
-	assign prediction = state[1] & branch_decode_sig; // true for HOT1, HOT2
+	// always @(posedge clk) begin
+	// 	if (branch_mem_sig_reg) begin
+	// 		case(state)
+	// 			COLD2 : state = (actual_branch_decision) ? COLD1 : COLD2;
+	// 			COLD1 : state = (actual_branch_decision) ? HOT1 : COLD2;
+	// 			HOT1  : state = (actual_branch_decision) ? HOT2 : COLD1;
+	// 			HOT2  : state = (actual_branch_decision) ? HOT2 : HOT1;
+	// 		endcase
+	// 	end
+	// end
+	// assign prediction = state[1] & branch_decode_sig; // true for HOT1, HOT2
 
 
 	/* Signals 
@@ -182,50 +182,50 @@ module branch_predictor(
 	 */
 
 	/* start with 8 options */
-	// reg [3:0]   branch_history = 4'b0000;
-	// /* use a 2-bit saturator for each */
-	// reg [2:0]	twolevel_state [15:0];
-	// /* we need to init, yes, this is the only option */
-	// initial begin
-	// 	twolevel_state[0] <= COLD2;
-	// 	twolevel_state[1] <= COLD2;
-	// 	twolevel_state[2] <= COLD2;
-	// 	twolevel_state[3] <= COLD2;
-	// 	twolevel_state[4] <= COLD2;
-	// 	twolevel_state[5] <= COLD2;
-	// 	twolevel_state[6] <= COLD2;
-	// 	twolevel_state[7] <= COLD2;
-	// 	twolevel_state[8] <= COLD2;
-	// 	twolevel_state[9] <= COLD2;
-	// 	twolevel_state[10] <= COLD2;
-	// 	twolevel_state[11] <= COLD2;
-	// 	twolevel_state[12] <= COLD2;
-	// 	twolevel_state[13] <= COLD2;
-	// 	twolevel_state[14] <= COLD2;
-	// 	twolevel_state[15] <= COLD2;
-	// end
+	reg [3:0]   branch_history = 4'b0000;
+	/* use a 2-bit saturator for each */
+	reg [2:0]	twolevel_state [15:0];
+	/* we need to init, yes, this is the only option */
+	initial begin
+		twolevel_state[0] <= COLD2;
+		twolevel_state[1] <= COLD2;
+		twolevel_state[2] <= COLD2;
+		twolevel_state[3] <= COLD2;
+		twolevel_state[4] <= COLD2;
+		twolevel_state[5] <= COLD2;
+		twolevel_state[6] <= COLD2;
+		twolevel_state[7] <= COLD2;
+		twolevel_state[8] <= COLD2;
+		twolevel_state[9] <= COLD2;
+		twolevel_state[10] <= COLD2;
+		twolevel_state[11] <= COLD2;
+		twolevel_state[12] <= COLD2;
+		twolevel_state[13] <= COLD2;
+		twolevel_state[14] <= COLD2;
+		twolevel_state[15] <= COLD2;
+	end
 
-	// /* when a branch occurs, update the branch history and counters */
-	// always @(posedge clk) begin
-	// 	if (branch_mem_sig_reg) begin
-	// 		branch_history[3] <= branch_history[2];
-	// 		branch_history[2] <= branch_history[1];
-	// 		branch_history[1] <= branch_history[0];
-	// 		branch_history[0] <= actual_branch_decision;
-	// 	end
-	// end
+	/* when a branch occurs, update the branch history and counters */
+	always @(posedge clk) begin
+		if (branch_mem_sig_reg) begin
+			branch_history[3] <= branch_history[2];
+			branch_history[2] <= branch_history[1];
+			branch_history[1] <= branch_history[0];
+			branch_history[0] <= actual_branch_decision;
+		end
+	end
 
-	// always @(posedge clk) begin
-	// 	if (branch_mem_sig_reg) begin
-	// 		case(twolevel_state[branch_history])
-	// 			COLD2 : twolevel_state[branch_history] = (actual_branch_decision) ? COLD1 : COLD2;
-	// 			COLD1 : twolevel_state[branch_history] = (actual_branch_decision) ? HOT1 : COLD2;
-	// 			HOT1  : twolevel_state[branch_history] = (actual_branch_decision) ? HOT2 : COLD1;
-	// 			HOT2  : twolevel_state[branch_history] = (actual_branch_decision) ? HOT2 : HOT1;
-	// 		endcase
-	// 	end
-	// end
-	// assign prediction = twolevel_state[branch_history][1] & branch_decode_sig;
+	always @(posedge clk) begin
+		if (branch_mem_sig_reg) begin
+			case(twolevel_state[branch_history])
+				COLD2 : twolevel_state[branch_history] = (actual_branch_decision) ? COLD1 : COLD2;
+				COLD1 : twolevel_state[branch_history] = (actual_branch_decision) ? HOT1 : COLD2;
+				HOT1  : twolevel_state[branch_history] = (actual_branch_decision) ? HOT2 : COLD1;
+				HOT2  : twolevel_state[branch_history] = (actual_branch_decision) ? HOT2 : HOT1;
+			endcase
+		end
+	end
+	assign prediction = twolevel_state[branch_history][1] & branch_decode_sig;
 
 
 	/* lets try a local decoder */
