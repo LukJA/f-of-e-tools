@@ -40,4 +40,5 @@ int main(void)
 	{
 		*gDebugLedsMemoryMappedRegister = 0xFF;	
 	}
+	return 0;
 }

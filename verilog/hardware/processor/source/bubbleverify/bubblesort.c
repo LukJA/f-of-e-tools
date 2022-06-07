@@ -26,8 +26,6 @@ int main(void)
 	{
 		for (i = 0; i < maxindex; i++)
 		{
-			*gDebugLedsMemoryMappedRegister = 0xFF;
-			*gDebugLedsMemoryMappedRegister = 0x00;
 			if (bsort_input[i] > bsort_input[i+1])
 			{
 				/*		swap		*/
@@ -49,9 +47,6 @@ int main(void)
 	}
 	else if (success == 2){
 		while(1){
-			*gDebugLedsMemoryMappedRegister = 0xFF;
-			*gDebugLedsMemoryMappedRegister = 0x00;
-			*gDebugLedsMemoryMappedRegister = 0x00;
 			*gDebugLedsMemoryMappedRegister = 0x00;
 		}
 	}
