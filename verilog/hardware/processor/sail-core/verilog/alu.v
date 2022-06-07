@@ -75,53 +75,102 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 		Branch_Enable = 1'b0;
 	end
 
+	// Adder module for ADD and SUB
 	wire adder_input_carry;
-	assign adder_input_carry = (ALUctl[3:0] == `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB);
+	assign adder_input_carry = (ALUctl[3:1] == 3'b011);  // Corresponds to SUB and SLT
 	wire [31:0] adder_input_b;
 	assign adder_input_b = B ^ {32{adder_input_carry}};
 	wire [31:0] adder_output;
 	assign adder_output = ({A, 1'b1} + {adder_input_b, adder_input_carry}) >> 1;
+
+	// Bitwise OR
+	wire [31:0] bitwise_or;
+	assign bitwise_or = A | B;
+
+	// Shift right
+	reg [31:0] shift_right_0;
+	reg [31:0] shift_right_1;
+	reg [31:0] shift_right_2;
+	reg [31:0] shift_right_3;
+	reg [31:0] shift_right_4;
+	wire shift_right_arithmetic;
+	assign shift_right_arithmetic = (ALUctl[3:0] == `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRA);
+
+	// Bitwise shift right (logical and arithmetic)
+	always @(*) begin
+
+		if (B[4] == 1) begin
+			shift_right_0 = A >> 16;
+			if (shift_right_arithmetic) shift_right_0[31:16] = {16{shift_right_0[15]}};
+		end
+		else shift_right_0 = A;
+
+		if (B[3] == 1) begin
+			shift_right_1 = shift_right_0 >> 8;
+			if (shift_right_arithmetic) shift_right_1[31:24] = {8{shift_right_1[23]}};
+		end
+		else shift_right_1 = shift_right_0;
+
+		if (B[2] == 1) begin
+			shift_right_2 = shift_right_1 >> 4;
+			if (shift_right_arithmetic) shift_right_2[31:28] = {4{shift_right_2[27]}};
+		end
+		else shift_right_2 = shift_right_1;
+
+		if (B[1] == 1) begin
+			shift_right_3 = shift_right_2 >> 2;
+			if (shift_right_arithmetic) shift_right_3[31:30] = {2{shift_right_3[29]}};
+		end
+		else shift_right_3 = shift_right_2;
+
+		if (B[0] == 1) begin
+			shift_right_4 = shift_right_3 >> 1;
+			if (shift_right_arithmetic) shift_right_4[31] = shift_right_4[30];
+		end
+		else shift_right_4 = shift_right_3;
+
+	end
+
+	wire [31:0] csrrc_and_bitwise_and = (A ^ {32{(`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC == ALUctl[3:0])}}) & B;
 
 	always @(ALUctl, A, B, adder_output) begin
 		case (ALUctl[3:0])
 			/*
 			 *	AND (the fields also match ANDI and LUI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:	ALUOut = A & B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:	ALUOut = csrrc_and_bitwise_and;
 
 			/*
 			 *	OR (the fields also match ORI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_OR:	ALUOut = A | B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_OR:	ALUOut = bitwise_or;
 
 			/*
 			 *	ADD (the fields also match AUIPC, all loads, all stores, and ADDI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD: begin
-				ALUOut = adder_output;
-			end
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	ALUOut = adder_output;
 
 			/*
 			 *	SUBTRACT (the fields also matches all branches)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB: begin
-				ALUOut = adder_output;
-			end
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	ALUOut = adder_output;
 
 			/*
 			 *	SLT (the fields also matches all the other SLT variants)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT:	ALUOut = $signed(A) < $signed(B) ? 32'b1 : 32'b0;
+            `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT: begin
+                ALUOut = adder_output[31] == 1 ? 32'b1 : 32'b0;
+            end
 
 			/*
 			 *	SRL (the fields also matches the other SRL variants)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRL:	ALUOut = A >> B[4:0];
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRL:	ALUOut = shift_right_4;
 
 			/*
 			 *	SRA (the fields also matches the other SRA variants)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRA:	ALUOut = $signed(A) >>> B[4:0];
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRA:	ALUOut = shift_right_4;
 
 			/*
 			 *	SLL (the fields also match the other SLL variants)
@@ -141,12 +190,12 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	CSRRS only
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRS:	ALUOut = A | B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRS:	ALUOut = bitwise_or;
 
 			/*
 			 *	CSRRC only
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC:	ALUOut = (~A) & B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC:	ALUOut = csrrc_and_bitwise_and;
 
 			/*
 			 *	Should never happen.
