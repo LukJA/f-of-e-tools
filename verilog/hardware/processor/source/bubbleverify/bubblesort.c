@@ -1,17 +1,24 @@
 #include <stdio.h>
 #include "bsort-input.h"
 
+int compareArrays(u_char a[], u_char b[], int n) {
+  int ii;
+  for(ii = 0; ii <= n; ii++) {
+	  u_char alpha = a[ii];
+	  u_char beta = b[ii];
+    if (alpha != beta) {
+		return 2;
+	}
+  }
+  return 1;
+}
 
 int main(void)
 {
 	volatile unsigned int *		gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
-	/* Begin Benchmark - Pulse Off On Off */
+	/* Begin Benchmark - Hold Off; */
 	*gDebugLedsMemoryMappedRegister = 0x00;
-	for (int j = 0; j < 1000; j++);
-	*gDebugLedsMemoryMappedRegister = 0xFF;
-	for (int j = 0; j < 1000; j++);
-	*gDebugLedsMemoryMappedRegister = 0x00;
-	
+
 	int i;
 	int maxindex = bsort_input_len - 1;
 
@@ -31,14 +38,17 @@ int main(void)
 		maxindex--;
 	}
 
-	/* End Benchmark - Pulse On Off On */
-	*gDebugLedsMemoryMappedRegister = 0xFF;
-	for (int j = 0; j < 1000; j++);
-	*gDebugLedsMemoryMappedRegister = 0x00;
-	for (int j = 0; j < 1000; j++);
-	while(1)
-	{
-		*gDebugLedsMemoryMappedRegister = 0xFF;	
+	int success = compareArrays(bsort_input, target_short, bsort_input_len-1);
+	if (success == 1){
+		while(1)
+		{
+			*gDebugLedsMemoryMappedRegister = 0xFF;
+		}
+	}
+	else if (success == 2){
+		while(1){
+			*gDebugLedsMemoryMappedRegister = 0x00;
+		}
 	}
 	return 0;
 }

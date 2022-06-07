@@ -44,21 +44,66 @@
 module top (led);
 	output [7:0]	led;
 
-	wire		clk_proc;
-	wire		data_clk_stall;
-	
-	wire		clk;
+	wire		clk_hfosc;
+	wire 		clk_pll;
+	wire  		clk;
+	wire 		PLLOK;
+
 	reg		ENCLKHF		= 1'b1;	// Plock enable
 	reg		CLKHF_POWERUP	= 1'b1;	// Power up the HFOSC circuit
 
+	reg [7:0] cpu_data;
+	assign led[1] = clk;
+	assign led[0] = cpu_data[0];
 
+
+	wire		clk_proc;
+	wire		clk_proc_local;
+	wire		data_clk_stall;
+
+
+	/* Clocking and Clock Routing */
 	/*
 	 *	Use the iCE40's hard primitive for the clock source.
+	 *  HFOSC set to ~12MHz~
 	 */
-	SB_HFOSC #(.CLKHF_DIV("0b11")) OSCInst0 (
+	SB_HFOSC #(.CLKHF_DIV("0b10")) OSCInst0 (
 		.CLKHFEN(ENCLKHF),
 		.CLKHFPU(CLKHF_POWERUP),
-		.CLKHF(clk)
+		.CLKHF(clk_hfosc)
+	);
+
+	/*
+	 * Using the PLL to overclock 
+	 * 22.875 MHz setting
+	 */
+	SB_PLL40_CORE #(
+		.FEEDBACK_PATH("SIMPLE"),
+		.DIVR(4'b0000),		// DIVR =  0
+		.DIVF(7'b0111010),	// DIVF = 84
+		.DIVQ(3'b101),		// DIVQ =  6
+		.FILTER_RANGE(3'b001)	// FILTER_RANGE = 1
+	)
+	PLLInst0 (
+		.REFERENCECLK(clk_hfosc),
+		.BYPASS("1b0"),
+		.PLLOUTGLOBAL(clk_pll),
+		.LOCK(PLLOK),
+		.RESETB("1b1")
+	);
+
+	/* 
+	 * Use a hard primitives for low-skew clock routing 	
+	 */
+	
+	SB_GB PLLClkInst0 (
+		.USER_SIGNAL_TO_GLOBAL_BUFFER (clk_pll),
+		.GLOBAL_BUFFER_OUTPUT (clk)
+	);
+	assign clk_proc_local = (data_clk_stall) ? 1'b1 : clk;
+	SB_GB BufInst1 (
+		.USER_SIGNAL_TO_GLOBAL_BUFFER (clk_proc_local),
+		.GLOBAL_BUFFER_OUTPUT (clk_proc)
 	);
 
 	/*
@@ -99,9 +144,8 @@ module top (led);
 			.memread(data_memread), 
 			.read_data(data_out),
 			.sign_mask(data_sign_mask),
-			.led(led),
+			.led(cpu_data),
 			.clk_stall(data_clk_stall)
 		);
 
-	assign clk_proc = (data_clk_stall) ? 1'b1 : clk;
 endmodule
