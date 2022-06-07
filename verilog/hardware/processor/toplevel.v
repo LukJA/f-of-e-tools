@@ -53,8 +53,8 @@ module top (led);
 	reg		CLKHF_POWERUP	= 1'b1;	// Power up the HFOSC circuit
 
 	reg [7:0] cpu_data;
-	assign led[0] = clk;
-	assign led[1] = cpu_data[0];
+	assign led[1] = clk;
+	assign led[0] = cpu_data[0];
 
 
 	wire		clk_proc;
@@ -75,13 +75,13 @@ module top (led);
 
 	/*
 	 * Using the PLL to overclock 
-	 * 24 MHz setting - 18.28 mS
+	 * 22.875 MHz setting
 	 */
 	SB_PLL40_CORE #(
 		.FEEDBACK_PATH("SIMPLE"),
 		.DIVR(4'b0000),		// DIVR =  0
-		.DIVF(7'b0111111),	// DIVF = 63
-		.DIVQ(3'b101),		// DIVQ =  5
+		.DIVF(7'b0111010),	// DIVF = 84
+		.DIVQ(3'b101),		// DIVQ =  6
 		.FILTER_RANGE(3'b001)	// FILTER_RANGE = 1
 	)
 	PLLInst0 (
